@@ -3,3 +3,9 @@
 
 #include "MiguCPSdkDemoGameModeBase.h"
 
+void AMiguCPSdkDemoGameModeBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+	CreateWidgetInstance();
+}
