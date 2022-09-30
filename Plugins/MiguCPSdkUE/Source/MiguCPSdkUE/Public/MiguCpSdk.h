@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifdef MIGUCPSDK_EXPORTS
 #define MIGUCPSDK_API __declspec(dllexport)
 #else
@@ -10,62 +10,62 @@ typedef void(*REQUEST_CALLBACK)(const char*);
 
 typedef struct TagMiguPayInfo
 {
-	char* gameName;     //ÓÎÏ·Ãû³Æ
-	char* contentCode;  //ÔÆÓÎÏ·ÄÚÈİ¹ÜÀíÆ½Ì¨µÄÄÚÈİ´úÂë
-	char* gameAccount;  //CPµÄÓÎÏ·ÕË»§ID
-	char* orderId;      //¶©µ¥ºÅ
-	char* propName;     //µÀ¾ßÃû³Æ
-	int orderAmount;	//¶©µ¥½ğ¶î£¨µ¥Î»£º·Ö£©
+	char* gameName;     //æ¸¸æˆåç§°
+	char* contentCode;  //äº‘æ¸¸æˆå†…å®¹ç®¡ç†å¹³å°çš„å†…å®¹ä»£ç 
+	char* gameAccount;  //CPçš„æ¸¸æˆè´¦æˆ·ID
+	char* orderId;      //è®¢å•å·
+	char* propName;     //é“å…·åç§°
+	int orderAmount;	//è®¢å•é‡‘é¢ï¼ˆå•ä½ï¼šåˆ†ï¼‰
 }MiguPayInfo;
 
 extern "C" {
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	MIGUCPSDK_API int CreateInstance_MsgSDK(void);
 
-	//ÊÍ·Å
+	//é‡Šæ”¾
 	MIGUCPSDK_API void ReleaseInstance(void);
 
-	//µÇÂ½ 
+	//ç™»é™† 
 	MIGUCPSDK_API void Login(const char* contentCode, REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//µÇÂ½
+	//ç™»é™†
 	MIGUCPSDK_API void GetLoginInfo(const char* contentCode, REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//»ñÈ¡Ò»¼¶Token
+	//è·å–ä¸€çº§Token
 	MIGUCPSDK_API void GetToken(REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//»ñÈ¡Í¨ÓÃĞÅÏ¢
+	//è·å–é€šç”¨ä¿¡æ¯
 	MIGUCPSDK_API void GetGeneralInfo(REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//²éÑ¯ÓÃ»§ËùÓĞÆ½Ì¨ÉèÖÃ¹ıµÄ³É¾Í
+	//æŸ¥è¯¢ç”¨æˆ·æ‰€æœ‰å¹³å°è®¾ç½®è¿‡çš„æˆå°±
 	MIGUCPSDK_API void QueryAllAchievement(REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//ÅúÁ¿ÉèÖÃÓÃ»§³É¾Í
+	//æ‰¹é‡è®¾ç½®ç”¨æˆ·æˆå°±
 	MIGUCPSDK_API void SetAchievementBatch(const char* data, REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//²éÑ¯ÓÃ»§µ¥¸ö³É¾Í×´Ì¬
+	//æŸ¥è¯¢ç”¨æˆ·å•ä¸ªæˆå°±çŠ¶æ€
 	MIGUCPSDK_API void QueryAchievement(const char* achievementId, REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//ÉèÖÃÓÃ»§µ¥¸ö³É¾Í
+	//è®¾ç½®ç”¨æˆ·å•ä¸ªæˆå°±
 	MIGUCPSDK_API void SetAchievement(const char* achievementId, int achievementType, double reachValue, REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//²éÑ¯ÓÃ»§µ¥¸ö³É¾ÍÍê³É½ø¶È
+	//æŸ¥è¯¢ç”¨æˆ·å•ä¸ªæˆå°±å®Œæˆè¿›åº¦
 	MIGUCPSDK_API void QueryAchievementPercentage(const char* achievementId, REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//Í¨ÓÃ½Ó¿Ú
+	//é€šç”¨æ¥å£
 	MIGUCPSDK_API void CommonBusiness(const char* bussinessUrl, const char* data, REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//Í¨ÓÃ½Ó¿Ú³õÊ¼»¯
+	//é€šç”¨æ¥å£åˆå§‹åŒ–
 	MIGUCPSDK_API int CommonBusinessInit(const char* appId, const char* appSecret);
 
-	//Ö§¸¶
+	//æ”¯ä»˜
 	MIGUCPSDK_API void CloudPay(const MiguPayInfo payInfo, REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//À­ÆğCPÖ§¸¶Url
-	//payUrl£ºÓÎÏ·Éú³ÉµÄH5Ö§¸¶Á´½Ó£¬ĞèÓÎÏ·Ìá¹©´«Èë
+	//æ‹‰èµ·CPæ”¯ä»˜Url
+	//payUrlï¼šæ¸¸æˆç”Ÿæˆçš„H5æ”¯ä»˜é“¾æ¥ï¼Œéœ€æ¸¸æˆæä¾›ä¼ å…¥
 	MIGUCPSDK_API void CloudPayToCP(const char* payUrl, REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 
-	//Í¨ÓÃ½Ó¿Ú-MsgSDK
+	//é€šç”¨æ¥å£-MsgSDK
 	MIGUCPSDK_API void CommonInterfaceByMsgSDK(const int type, const char* data, REQUEST_CALLBACK callback, int timeoutSeconds = 10);
 }
 
@@ -73,43 +73,43 @@ extern "C" {
 class MIGUCPSDK_API IMiguCpSdk {
 public:
 	enum QUERY_RESULT {
-		RESULT_OK = 0,								//³É¹¦
-		RESULT_TIMEOUT = -1,						//³¬Ê±
-		RESULT_INVALID_PARAMETER = -2,				//²ÎÊı´íÎó£¬±ÈÈçÖ¸ÕëÎªNULL
-		RESULT_EXCEPTION = -3,						//Òì³££¬±ÈÈçÊı¾İJson¸ñÊ½²»¶Ô
-		RESULT_GENERAL_FILE_NOT_EXIST = -4,         //¹²ÏíÎÄ¼ş²»´æÔÚ
-		RESULT_SERVER_NULL = -5,                    //ÇëÇóÖĞÌ¨·şÎñ¶ËÊı¾İÎª¿Õ
-		RESULT_USERID_NULL = -6,                    //»ñÈ¡useridµÈĞÅÏ¢Îª¿Õ
-		RESULT_LIBCURL_ERROR = -7,                  //httpÇëÇó±¨´í
-		RESULT_MSGSDK_ERROR = -8,                   //ÏûÏ¢sdk´íÎó
-		RESULT_REQUEST_FAIL = -9,                   //ÇëÇó·µ»ØÊ§°Ü
+		RESULT_OK = 0,								//æˆåŠŸ
+		RESULT_TIMEOUT = -1,						//è¶…æ—¶
+		RESULT_INVALID_PARAMETER = -2,				//å‚æ•°é”™è¯¯ï¼Œæ¯”å¦‚æŒ‡é’ˆä¸ºNULL
+		RESULT_EXCEPTION = -3,						//å¼‚å¸¸ï¼Œæ¯”å¦‚æ•°æ®Jsonæ ¼å¼ä¸å¯¹
+		RESULT_GENERAL_FILE_NOT_EXIST = -4,         //å…±äº«æ–‡ä»¶ä¸å­˜åœ¨
+		RESULT_SERVER_NULL = -5,                    //è¯·æ±‚ä¸­å°æœåŠ¡ç«¯æ•°æ®ä¸ºç©º
+		RESULT_USERID_NULL = -6,                    //è·å–useridç­‰ä¿¡æ¯ä¸ºç©º
+		RESULT_LIBCURL_ERROR = -7,                  //httpè¯·æ±‚æŠ¥é”™
+		RESULT_MSGSDK_ERROR = -8,                   //æ¶ˆæ¯sdké”™è¯¯
+		RESULT_REQUEST_FAIL = -9,                   //è¯·æ±‚è¿”å›å¤±è´¥
 	};
 	
-	//µÇÂ½ 
+	//ç™»é™† 
 	virtual void Login(const char* contentCode, REQUEST_CALLBACK callback,int timeoutSeconds = 10) = 0;
 
-	//µÇÂ½
+	//ç™»é™†
 	virtual void GetLoginInfo(const char* contentCode, REQUEST_CALLBACK callback, int timeoutSeconds = 10) = 0;
 
-	//»ñÈ¡Í¨ÓÃĞÅÏ¢
+	//è·å–é€šç”¨ä¿¡æ¯
 	virtual void GetGeneralInfo(REQUEST_CALLBACK callback, int timeoutSeconds = 10) = 0;
 
-	//²éÑ¯ÓÃ»§ËùÓĞÆ½Ì¨ÉèÖÃ¹ıµÄ³É¾Í
+	//æŸ¥è¯¢ç”¨æˆ·æ‰€æœ‰å¹³å°è®¾ç½®è¿‡çš„æˆå°±
 	virtual void QueryAllAchievement(REQUEST_CALLBACK callback, int timeoutSeconds = 10) = 0;
 
-	//ÅúÁ¿ÉèÖÃÓÃ»§³É¾Í
+	//æ‰¹é‡è®¾ç½®ç”¨æˆ·æˆå°±
 	virtual void SetAchievementBatch(const char* data, REQUEST_CALLBACK callback, int timeoutSeconds = 10) = 0;
 
-	//²éÑ¯ÓÃ»§µ¥¸ö³É¾Í×´Ì¬
+	//æŸ¥è¯¢ç”¨æˆ·å•ä¸ªæˆå°±çŠ¶æ€
 	virtual void QueryAchievement(const char* achievementId, REQUEST_CALLBACK callback, int timeoutSeconds = 10) = 0;
 
-	//ÉèÖÃÓÃ»§µ¥¸ö³É¾Í
+	//è®¾ç½®ç”¨æˆ·å•ä¸ªæˆå°±
 	virtual void SetAchievement(const char* achievementId, int achievementType, double reachValue, REQUEST_CALLBACK callback, int timeoutSeconds = 10) = 0;
 
-	//²éÑ¯ÓÃ»§µ¥¸ö³É¾ÍÍê³É½ø¶È
+	//æŸ¥è¯¢ç”¨æˆ·å•ä¸ªæˆå°±å®Œæˆè¿›åº¦
 	virtual void QueryAchievementPercentage(const char* achievementId, REQUEST_CALLBACK callback, int timeoutSeconds = 10) = 0;
 
-	//Í¨ÓÃ½Ó¿Ú
+	//é€šç”¨æ¥å£
 	virtual void CommonBusiness(const char* bussinessUrl, const char* data,REQUEST_CALLBACK callback, int timeoutSeconds = 10) = 0;
 
 	virtual int CommonBusinessInit(const char* appId, const char* appSecret) = 0;
