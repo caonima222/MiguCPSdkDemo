@@ -92,7 +92,7 @@ void UMiguCPSdkUEBPLibrary::OnLogin(const char* data)
 	LoginResult = FString(temp.c_str());
 	UE_LOG(LogTemp, Warning, TEXT("OnLogin Callback= %s"), *LoginResult);
 	OpenMessageBox(LoginResult);
-	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnLogin.Broadcast(LoginResult);
@@ -106,7 +106,7 @@ void UMiguCPSdkUEBPLibrary::OnGetLoginInfo(const char* data)
 	LoginResult = FString(temp.c_str());
 	UE_LOG(LogTemp, Warning, TEXT("OnGetLoginInfo: %s"), *LoginResult);
 	OpenMessageBox(LoginResult);
-	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnGetLoginInfo.Broadcast(LoginResult);
@@ -122,7 +122,7 @@ void UMiguCPSdkUEBPLibrary::OnTokenInfo(const char* data)
 	UE_LOG(LogTemp, Warning, TEXT("OnGetToken Callback= %s"), *TokenResult);
 	OpenMessageBox(TokenResult);
 	
-	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnGetToken.Broadcast(TokenResult);
@@ -138,7 +138,7 @@ void UMiguCPSdkUEBPLibrary::OnGetGeneralInfo(const char* data)
 	UE_LOG(LogTemp, Warning, TEXT("OnGetGeneralInfo: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
-	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnGetGeneralInfo.Broadcast(ResultString);
@@ -154,7 +154,7 @@ void UMiguCPSdkUEBPLibrary::OnQueryAllAchievement(const char* data)
 	UE_LOG(LogTemp, Warning, TEXT("OnQueryAllAchievement: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
-	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnQueryAllAchievement.Broadcast(ResultString);
@@ -170,7 +170,7 @@ void UMiguCPSdkUEBPLibrary::OnSetAchievementBatch(const char* data)
 	UE_LOG(LogTemp, Warning, TEXT("OnSetAchievementBatch: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
-	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnSetAchievementBatch.Broadcast(ResultString);
@@ -186,7 +186,7 @@ void UMiguCPSdkUEBPLibrary::OnQueryAchievement(const char* data)
 	UE_LOG(LogTemp, Warning, TEXT("OnQueryAchievement: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
-	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnQueryAchievement.Broadcast(ResultString);
@@ -202,7 +202,7 @@ void UMiguCPSdkUEBPLibrary::OnSetAchievement(const char* data)
 	UE_LOG(LogTemp, Warning, TEXT("OnSetAchievement: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
-	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnSetAchievement.Broadcast(ResultString);
@@ -218,7 +218,7 @@ void UMiguCPSdkUEBPLibrary::OnQueryAchievementPercentage(const char* data)
 	UE_LOG(LogTemp, Warning, TEXT("OnQueryAchievementPercentage: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
-	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnQueryAchievementPercentage.Broadcast(ResultString);
@@ -234,7 +234,7 @@ void UMiguCPSdkUEBPLibrary::OnCommonBusiness(const char* data)
 	UE_LOG(LogTemp, Warning, TEXT("OnCommonBusiness: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
-	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnCommonBusiness.Broadcast(ResultString);
@@ -248,5 +248,24 @@ void UMiguCPSdkUEBPLibrary::OpenMessageBox(FString Content, FString Title)
 	const FText DialogTitle = FText::FromString(Title);
 	const FText DialogContent = FText::FromString(Content);
 	EAppReturnType::Type const ReturnType = FMessageDialog::Open(EAppMsgType::Ok, DialogContent, &DialogTitle);
+}
+
+UWorld* UMiguCPSdkUEBPLibrary::GetCurWorld()
+{
+	UWorld* FinalWorld = nullptr;
+
+	// Return PIE worlds if there are any
+	for (const FWorldContext& Context : GEngine->GetWorldContexts())
+	{
+		if (Context.WorldType == EWorldType::PIE || Context.WorldType == EWorldType::Game)
+		{
+			FinalWorld = Context.World();
+			return FinalWorld;
+		}
+	}
+
+	check(FinalWorld);
+
+	return FinalWorld;
 }
 PRAGMA_ENABLE_OPTIMIZATION

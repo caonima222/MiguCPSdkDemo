@@ -70,4 +70,8 @@ public:
 
 private:
 	static void OpenMessageBox(FString Content, FString Title = TEXT("Message"));
+
+
+private:
+	static UWorld* GetCurWorld();
 };
