@@ -4,7 +4,7 @@
 
 #include "Modules/ModuleManager.h"
 
-class FMiguCPSdkUEModule : public IModuleInterface
+class MIGUCPSDKUE_API FMiguCPSdkUEModule : public IModuleInterface
 {
 public:
 

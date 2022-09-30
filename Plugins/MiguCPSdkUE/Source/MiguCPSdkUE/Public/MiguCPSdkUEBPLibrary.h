@@ -3,13 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-//#include "MiguCpSdk.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "MiguCPSdkUEBPLibrary.generated.h"
 
 
 UCLASS()
-class  UMiguCPSdkUEBPLibrary : public UBlueprintFunctionLibrary
+class MIGUCPSDKUE_API UMiguCPSdkUEBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
@@ -18,19 +17,20 @@ public:
 		static int CreateInstanceMsg();
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu LoginMsg"), Category = "MiguCPSDK")
-		static void LoginMsg(FString ContentCode, int timeoutSeconds);
+		static void LoginMsg(FString ContentCode, int timeoutSeconds = 10);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu LoginInforMsg"), Category = "MiguCPSDK")
-		static int LoginInforMsg();
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu LoginInfoMsg"), Category = "MiguCPSDK")
+		static void LoginInfoMsg(FString ContentCode, int timeoutSeconds);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu ReleaseSDKMsg"), Category = "MiguCPSDK")
-		static int ReleaseSDKMsg();
+		static void ReleaseSDKMsg();
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu GetToken"), Category = "MiguCPSDK")
-		static void GetTokenInfor(int timeoutSeconds);
+		static void GetTokenInfo(int timeoutSeconds = 10);
 
 public:
 	static void  OnLogin(const char* data);
 	static void  OnTokenInfo(const char* data);
+	static void OnGetLoginInfo(const char* data);
 
 };

@@ -28,7 +28,10 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FLoginResponseDelegatge OnLogin;
 
-	// 登录返回
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnGetLoginInfo;
+
+	// 获取Token返回
 	UPROPERTY(BlueprintAssignable)
 	FLoginResponseDelegatge OnGetToken;
 

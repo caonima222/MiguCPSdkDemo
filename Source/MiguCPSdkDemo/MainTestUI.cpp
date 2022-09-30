@@ -3,6 +3,7 @@
 
 #include "MainTestUI.h"
 
+#include "MiguCPSdkUEBPLibrary.h"
 #include "Misc/MessageDialog.h"
 
 void UMainTestUI::NativeOnInitialized()
@@ -67,6 +68,10 @@ void UMainTestUI::NativeOnInitialized()
 	{
 		Button_CPUrl->OnClicked.AddDynamic(this, &UMainTestUI::OnClickCPUrl);
 	}
+	if(Button_Init)
+	{
+		Button_Init->OnClicked.AddDynamic(this, &UMainTestUI::OnClickInit);
+	}
 }
 
 void UMainTestUI::OnClickGeneralInfo()
@@ -106,7 +111,7 @@ void UMainTestUI::OnClickReleaseInst()
 
 void UMainTestUI::OnClickLogin()
 {
-	
+	UMiguCPSdkUEBPLibrary::LoginMsg(TEXT("006206763000"));
 }
 
 void UMainTestUI::OnClickLoginInfo()
@@ -121,7 +126,7 @@ void UMainTestUI::OnClickSendData()
 
 void UMainTestUI::OnClickGetToken()
 {
-	
+	UMiguCPSdkUEBPLibrary::GetTokenInfo();
 }
 
 void UMainTestUI::OnClickPay()
@@ -142,6 +147,11 @@ void UMainTestUI::OnClickExit()
 void UMainTestUI::OnClickCPUrl()
 {
 	
+}
+
+void UMainTestUI::OnClickInit()
+{
+	UMiguCPSdkUEBPLibrary::CreateInstanceMsg();
 }
 
 

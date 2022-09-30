@@ -24,35 +24,49 @@ int UMiguCPSdkUEBPLibrary::CreateInstanceMsg()
 
 void UMiguCPSdkUEBPLibrary::LoginMsg(FString ContentCode, int timeoutSeconds)
 {
-	Login(TCHAR_TO_UTF8(*ContentCode), &UMiguCPSdkUEBPLibrary::OnLogin, 10);
+	Login(TCHAR_TO_UTF8(*ContentCode), &UMiguCPSdkUEBPLibrary::OnLogin, timeoutSeconds);
 }
 
-int UMiguCPSdkUEBPLibrary::LoginInforMsg()
+void UMiguCPSdkUEBPLibrary::LoginInfoMsg(FString ContentCode, int timeoutSeconds)
 {
-	return 0;
-
+	GetLoginInfo(TCHAR_TO_UTF8(*ContentCode), &UMiguCPSdkUEBPLibrary::OnLogin, timeoutSeconds);
 }
 
-int UMiguCPSdkUEBPLibrary::ReleaseSDKMsg()
+void UMiguCPSdkUEBPLibrary::ReleaseSDKMsg()
 {
-	return 0;
+	ReleaseInstance();
 }
 
-void UMiguCPSdkUEBPLibrary::GetTokenInfor(int timeoutSeconds)
+void UMiguCPSdkUEBPLibrary::GetTokenInfo(int timeoutSeconds)
 {
 	GetToken(&UMiguCPSdkUEBPLibrary::OnTokenInfo, timeoutSeconds);
 }
+
+//-------------Handle Callback---------------------------------------------------------------
 
 void UMiguCPSdkUEBPLibrary::OnLogin(const char* data)
 {
 	FString LoginResult;
 	std::string temp = data;
 	LoginResult = FString(temp.c_str());
-	UE_LOG(LogTemp, Log, TEXT("OnLogin Callback= %s"), *LoginResult);
+	UE_LOG(LogTemp, Warning, TEXT("OnLogin Callback= %s"), *LoginResult);
 	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
 	if (MIGUSDKGameIns)
 	{
 		MIGUSDKGameIns->OnLogin.Broadcast(LoginResult);
+	}
+}
+
+void UMiguCPSdkUEBPLibrary::OnGetLoginInfo(const char* data)
+{
+	FString LoginResult;
+	std::string temp = data;
+	LoginResult = FString(temp.c_str());
+	UE_LOG(LogTemp, Warning, TEXT("OnGetLoginInfo: %s"), *LoginResult);
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	if (MIGUSDKGameIns)
+	{
+		MIGUSDKGameIns->OnGetLoginInfo.Broadcast(LoginResult);
 	}
 }
 
@@ -62,7 +76,7 @@ void UMiguCPSdkUEBPLibrary::OnTokenInfo(const char* data)
 	std::string temp = data;
 	TokenResult = FString(temp.c_str());
 
-	UE_LOG(LogTemp, Log, TEXT("OnGetToken Callback= %s"), *TokenResult);
+	UE_LOG(LogTemp, Warning, TEXT("OnGetToken Callback= %s"), *TokenResult);
 
 	
 	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));

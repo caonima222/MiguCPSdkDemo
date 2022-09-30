@@ -18,7 +18,7 @@
 		{
 			"Name": "MiguCPSdkUE",
 			"Type": "Runtime",
-			"LoadingPhase": "PreLoadingScreen",
+			"LoadingPhase": "Default",
 			"WhitelistPlatforms": [
 				"Win64"
 			]

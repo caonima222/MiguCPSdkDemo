@@ -18,7 +18,7 @@ public class MiguCPSdkUE : ModuleRules
 			new string[] {
 				// ... add public include paths required here ...
 				Path.Combine(ModuleDirectory, "Public"),
-				//Path.Combine(ThirdPartyPath, "include"),
+				Path.Combine(ThirdPartyPath, "include"),
 			}
 			);
 		

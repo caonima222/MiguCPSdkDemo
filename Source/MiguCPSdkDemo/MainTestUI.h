@@ -63,6 +63,9 @@ public:
 	UPROPERTY(meta = (BindWidget))
 	UButton* Button_CPUrl;
 
+	UPROPERTY(meta = (BindWidget))
+	UButton* Button_Init;
+
 
 	UFUNCTION()
 	void OnClickGeneralInfo();
@@ -108,6 +111,9 @@ public:
 
 	UFUNCTION()
 	void OnClickCPUrl();
+
+	UFUNCTION()
+	void OnClickInit();
 
 	UFUNCTION()
 	void OpenMessageBox(FString Title, FString Content);

@@ -3,19 +3,7 @@
 
 #include "MiguBlueprintFunctionLibrary.h"
 
-APlayerController* UMiguBlueprintFunctionLibrary::GetLocalPlayerController(UObject* WorldContextObject)
+void UMiguBlueprintFunctionLibrary::Migu_Pay()
 {
-	// if (UWorld* World = GEngine->GetWorldFromContextObject(WorldContextObject))
-	// {
-	// 	for (FConstPlayerControllerIterator Iterator = World->GetPlayerControllerIterator(); Iterator; ++Iterator)
-	// 	{
-	// 		APlayerController* PlayerController = *Iterator;
-	// 		if (PlayerController->IsLocalController())
-	// 		{
-	// 			// For this project, we will only ever have one local player.
-	// 			return PlayerController;
-	// 		}
-	// 	}
-	// }
-	return nullptr;
+	UE_LOG(LogTemp, Warning, TEXT("cyc-------Migu_Pay"));
 }
