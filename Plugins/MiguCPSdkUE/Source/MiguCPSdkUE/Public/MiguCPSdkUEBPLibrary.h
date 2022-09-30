@@ -20,17 +20,25 @@ public:
 		static void LoginMsg(FString ContentCode, int timeoutSeconds = 10);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu LoginInfoMsg"), Category = "MiguCPSDK")
-		static void LoginInfoMsg(FString ContentCode, int timeoutSeconds);
+		static void LoginInfoMsg(FString ContentCode, int timeoutSeconds = 10);
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu ReleaseSDKMsg"), Category = "MiguCPSDK")
 		static void ReleaseSDKMsg();
 
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu GetToken"), Category = "MiguCPSDK")
-		static void GetTokenInfo(int timeoutSeconds = 10);
+		static void GetTokenInfoMsg(int timeoutSeconds = 10);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu GetGeneralInfo"), Category = "MiguCPSDK")
+	static void GetGeneralInfoMsg(int timeoutSeconds = 10);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu QueryAllAchievement"), Category = "MiguCPSDK")
+	static void QueryAllAchievementMsg(int timeoutSeconds = 10);
+	
 
 public:
 	static void  OnLogin(const char* data);
 	static void  OnTokenInfo(const char* data);
 	static void OnGetLoginInfo(const char* data);
-
+	static void OnGetGeneralInfo(const char* data);
+	static void OnQueryAllAchievement(const char* data);
 };

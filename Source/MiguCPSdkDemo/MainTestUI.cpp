@@ -126,7 +126,7 @@ void UMainTestUI::OnClickSendData()
 
 void UMainTestUI::OnClickGetToken()
 {
-	UMiguCPSdkUEBPLibrary::GetTokenInfo();
+	UMiguCPSdkUEBPLibrary::GetTokenInfoMsg();
 }
 
 void UMainTestUI::OnClickPay()

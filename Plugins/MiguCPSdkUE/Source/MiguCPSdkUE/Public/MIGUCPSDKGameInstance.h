@@ -35,6 +35,14 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FLoginResponseDelegatge OnGetToken;
 
+	// 获取通用信息
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnGetGeneralInfo;
 
+	// 获取所有成就
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnQueryAllAchievement;
+
+	
 
 };
