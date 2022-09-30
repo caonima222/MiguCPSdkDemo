@@ -1,10 +1,10 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "MiguCPSdkUEBPLibrary.h"
-#include "MiguCpSdk.h"
 #include <string>
 #include "Kismet/GameplayStatics.h"
 #include "MIGUCPSDKGameInstance.h"
+#include "Misc/MessageDialog.h"
 
 PRAGMA_DISABLE_OPTIMIZATION
 
@@ -49,7 +49,37 @@ void UMiguCPSdkUEBPLibrary::GetGeneralInfoMsg(int timeoutSeconds)
 
 void UMiguCPSdkUEBPLibrary::QueryAllAchievementMsg(int timeoutSeconds)
 {
-	QueryAllAchievement(&UMiguCPSdkUEBPLibrary::OnGetGeneralInfo, timeoutSeconds);
+	QueryAllAchievement(&UMiguCPSdkUEBPLibrary::OnQueryAllAchievement, timeoutSeconds);
+}
+
+void UMiguCPSdkUEBPLibrary::SetAchievementBatchMsg(FString ContentCode, int timeoutSeconds)
+{
+	SetAchievementBatch(TCHAR_TO_UTF8(*ContentCode), &UMiguCPSdkUEBPLibrary::OnSetAchievementBatch, timeoutSeconds);
+}
+
+void UMiguCPSdkUEBPLibrary::QueryAchievementMsg(FString AchievementId, int timeoutSeconds)
+{
+	QueryAchievement(TCHAR_TO_UTF8(*AchievementId), &UMiguCPSdkUEBPLibrary::OnQueryAchievement, timeoutSeconds);
+}
+
+void UMiguCPSdkUEBPLibrary::SetAchievementMsg(FString AchievementId, int AchievementType, float ReachValue, int timeoutSeconds)
+{
+	SetAchievement(TCHAR_TO_UTF8(*AchievementId), AchievementType, (double)ReachValue, &UMiguCPSdkUEBPLibrary::OnSetAchievement, timeoutSeconds);
+}
+
+void UMiguCPSdkUEBPLibrary::QueryAchievementPercentageMsg(FString AchievementId, int timeoutSeconds)
+{
+	QueryAchievementPercentage(TCHAR_TO_UTF8(*AchievementId), &UMiguCPSdkUEBPLibrary::OnQueryAchievementPercentage, timeoutSeconds);
+}
+
+void UMiguCPSdkUEBPLibrary::CommonBusinessMsg(FString BusinessUrl, FString Data, int timeoutSeconds)
+{
+	CommonBusiness(TCHAR_TO_UTF8(*BusinessUrl), TCHAR_TO_UTF8(*Data), &UMiguCPSdkUEBPLibrary::OnCommonBusiness, timeoutSeconds);
+}
+
+int UMiguCPSdkUEBPLibrary::CommonBusinessInitMsg(FString AppId, FString AppSecret)
+{
+	return CommonBusinessInit(TCHAR_TO_UTF8(*AppId), TCHAR_TO_UTF8(*AppSecret));
 }
 
 
@@ -61,6 +91,7 @@ void UMiguCPSdkUEBPLibrary::OnLogin(const char* data)
 	std::string temp = data;
 	LoginResult = FString(temp.c_str());
 	UE_LOG(LogTemp, Warning, TEXT("OnLogin Callback= %s"), *LoginResult);
+	OpenMessageBox(LoginResult);
 	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
 	if (MIGUSDKGameIns)
 	{
@@ -74,6 +105,7 @@ void UMiguCPSdkUEBPLibrary::OnGetLoginInfo(const char* data)
 	std::string temp = data;
 	LoginResult = FString(temp.c_str());
 	UE_LOG(LogTemp, Warning, TEXT("OnGetLoginInfo: %s"), *LoginResult);
+	OpenMessageBox(LoginResult);
 	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
 	if (MIGUSDKGameIns)
 	{
@@ -88,7 +120,7 @@ void UMiguCPSdkUEBPLibrary::OnTokenInfo(const char* data)
 	TokenResult = FString(temp.c_str());
 
 	UE_LOG(LogTemp, Warning, TEXT("OnGetToken Callback= %s"), *TokenResult);
-
+	OpenMessageBox(TokenResult);
 	
 	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
 	if (MIGUSDKGameIns)
@@ -99,36 +131,122 @@ void UMiguCPSdkUEBPLibrary::OnTokenInfo(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnGetGeneralInfo(const char* data)
 {
-	FString TokenResult;
+	FString ResultString;
 	std::string temp = data;
-	TokenResult = FString(temp.c_str());
+	ResultString = FString(temp.c_str());
 
-	UE_LOG(LogTemp, Warning, TEXT("OnGetGeneralInfo: %s"), *TokenResult);
-
+	UE_LOG(LogTemp, Warning, TEXT("OnGetGeneralInfo: %s"), *ResultString);
+	OpenMessageBox(ResultString);
 	
 	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
 	if (MIGUSDKGameIns)
 	{
-		MIGUSDKGameIns->OnGetGeneralInfo.Broadcast(TokenResult);
+		MIGUSDKGameIns->OnGetGeneralInfo.Broadcast(ResultString);
 	}
 }
 
 void UMiguCPSdkUEBPLibrary::OnQueryAllAchievement(const char* data)
 {
-	FString TokenResult;
+	FString ResultString;
 	std::string temp = data;
-	TokenResult = FString(temp.c_str());
+	ResultString = FString(temp.c_str());
 
-	UE_LOG(LogTemp, Warning, TEXT("OnQueryAllAchievement: %s"), *TokenResult);
-
+	UE_LOG(LogTemp, Warning, TEXT("OnQueryAllAchievement: %s"), *ResultString);
+	OpenMessageBox(ResultString);
 	
 	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
 	if (MIGUSDKGameIns)
 	{
-		MIGUSDKGameIns->OnQueryAllAchievement.Broadcast(TokenResult);
+		MIGUSDKGameIns->OnQueryAllAchievement.Broadcast(ResultString);
+	}
+}
+
+void UMiguCPSdkUEBPLibrary::OnSetAchievementBatch(const char* data)
+{
+	FString ResultString;
+	std::string temp = data;
+	ResultString = FString(temp.c_str());
+
+	UE_LOG(LogTemp, Warning, TEXT("OnSetAchievementBatch: %s"), *ResultString);
+	OpenMessageBox(ResultString);
+	
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	if (MIGUSDKGameIns)
+	{
+		MIGUSDKGameIns->OnSetAchievementBatch.Broadcast(ResultString);
+	}
+}
+
+void UMiguCPSdkUEBPLibrary::OnQueryAchievement(const char* data)
+{
+	FString ResultString;
+	std::string temp = data;
+	ResultString = FString(temp.c_str());
+
+	UE_LOG(LogTemp, Warning, TEXT("OnQueryAchievement: %s"), *ResultString);
+	OpenMessageBox(ResultString);
+	
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	if (MIGUSDKGameIns)
+	{
+		MIGUSDKGameIns->OnQueryAchievement.Broadcast(ResultString);
+	}
+}
+
+void UMiguCPSdkUEBPLibrary::OnSetAchievement(const char* data)
+{
+	FString ResultString;
+	std::string temp = data;
+	ResultString = FString(temp.c_str());
+
+	UE_LOG(LogTemp, Warning, TEXT("OnSetAchievement: %s"), *ResultString);
+	OpenMessageBox(ResultString);
+	
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	if (MIGUSDKGameIns)
+	{
+		MIGUSDKGameIns->OnSetAchievement.Broadcast(ResultString);
+	}
+}
+
+void UMiguCPSdkUEBPLibrary::OnQueryAchievementPercentage(const char* data)
+{
+	FString ResultString;
+	std::string temp = data;
+	ResultString = FString(temp.c_str());
+
+	UE_LOG(LogTemp, Warning, TEXT("OnQueryAchievementPercentage: %s"), *ResultString);
+	OpenMessageBox(ResultString);
+	
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	if (MIGUSDKGameIns)
+	{
+		MIGUSDKGameIns->OnQueryAchievementPercentage.Broadcast(ResultString);
+	}
+}
+
+void UMiguCPSdkUEBPLibrary::OnCommonBusiness(const char* data)
+{
+	FString ResultString;
+	std::string temp = data;
+	ResultString = FString(temp.c_str());
+
+	UE_LOG(LogTemp, Warning, TEXT("OnCommonBusiness: %s"), *ResultString);
+	OpenMessageBox(ResultString);
+	
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(GEngine->GetWorld()));
+	if (MIGUSDKGameIns)
+	{
+		MIGUSDKGameIns->OnCommonBusiness.Broadcast(ResultString);
 	}
 }
 
 
 
+void UMiguCPSdkUEBPLibrary::OpenMessageBox(FString Content, FString Title)
+{
+	const FText DialogTitle = FText::FromString(Title);
+	const FText DialogContent = FText::FromString(Content);
+	EAppReturnType::Type const ReturnType = FMessageDialog::Open(EAppMsgType::Ok, DialogContent, &DialogTitle);
+}
 PRAGMA_ENABLE_OPTIMIZATION

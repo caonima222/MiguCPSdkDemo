@@ -43,6 +43,25 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FLoginResponseDelegatge OnQueryAllAchievement;
 
-	
+	// 批量设置用户成就
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnSetAchievementBatch;
 
+	// 查询用户单个成就状态
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnQueryAchievement;
+
+	// 设置用户单个成就
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnSetAchievement;
+
+	// 查询用户单个成就完成进度
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnQueryAchievementPercentage;
+
+	// 通用接口
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnCommonBusiness;
+
+	
 };
