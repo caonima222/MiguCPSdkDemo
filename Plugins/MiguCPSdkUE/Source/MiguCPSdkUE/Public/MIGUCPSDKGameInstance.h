@@ -63,5 +63,17 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FLoginResponseDelegatge OnCommonBusiness;
 
+	// 支付
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnCloudPay;
+
+	// 拉起CP支付Url
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnCloudPayToCP;
+
+	// 通用接口-MsgSDK
+	UPROPERTY(BlueprintAssignable)
+	FLoginResponseDelegatge OnCommonInterfaceByMsgSDK;
+
 	
 };

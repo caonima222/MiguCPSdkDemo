@@ -82,6 +82,30 @@ int UMiguCPSdkUEBPLibrary::CommonBusinessInitMsg(FString AppId, FString AppSecre
 	return CommonBusinessInit(TCHAR_TO_UTF8(*AppId), TCHAR_TO_UTF8(*AppSecret));
 }
 
+void UMiguCPSdkUEBPLibrary::CloudPayMsg(const FMiguPayInfo PayInfo, int timeoutSeconds)
+{
+	MiguPayInfo FinalPayInfo;
+	FinalPayInfo.gameName = TCHAR_TO_ANSI(*PayInfo.gameName);
+	FinalPayInfo.contentCode = TCHAR_TO_ANSI(*PayInfo.contentCode);
+	FinalPayInfo.gameAccount = TCHAR_TO_ANSI(*PayInfo.gameAccount);
+	FinalPayInfo.orderId = TCHAR_TO_ANSI(*PayInfo.orderId);
+	FinalPayInfo.propName = TCHAR_TO_ANSI(*PayInfo.propName);
+	FinalPayInfo.orderAmount = PayInfo.orderAmount;
+
+	CloudPay(FinalPayInfo, &UMiguCPSdkUEBPLibrary::OnCloudPay, timeoutSeconds);
+}
+
+void UMiguCPSdkUEBPLibrary::CloudPayToCPMsg(FString PayUrl, int timeoutSeconds)
+{
+	CloudPayToCP(TCHAR_TO_UTF8(*PayUrl), &UMiguCPSdkUEBPLibrary::OnCloudPayToCP, timeoutSeconds);
+}
+
+void UMiguCPSdkUEBPLibrary::CommonInterfaceByMsgSDKMsg(const int Type, FString Data, int timeoutSeconds)
+{
+	CommonInterfaceByMsgSDK(Type, TCHAR_TO_UTF8(*Data), &UMiguCPSdkUEBPLibrary::OnCommonInterfaceByMsgSDK, timeoutSeconds);
+}
+
+
 
 //-------------Handle Callback---------------------------------------------------------------
 
@@ -241,6 +265,53 @@ void UMiguCPSdkUEBPLibrary::OnCommonBusiness(const char* data)
 	}
 }
 
+void UMiguCPSdkUEBPLibrary::OnCloudPay(const char* data)
+{
+	FString ResultString;
+	std::string temp = data;
+	ResultString = FString(temp.c_str());
+
+	UE_LOG(LogTemp, Warning, TEXT("OnCloudPay: %s"), *ResultString);
+	OpenMessageBox(ResultString);
+	
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
+	if (MIGUSDKGameIns)
+	{
+		MIGUSDKGameIns->OnCloudPay.Broadcast(ResultString);
+	}
+}
+
+void UMiguCPSdkUEBPLibrary::OnCloudPayToCP(const char* data)
+{
+	FString ResultString;
+	std::string temp = data;
+	ResultString = FString(temp.c_str());
+
+	UE_LOG(LogTemp, Warning, TEXT("OnCloudPayToCP: %s"), *ResultString);
+	OpenMessageBox(ResultString);
+	
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
+	if (MIGUSDKGameIns)
+	{
+		MIGUSDKGameIns->OnCloudPayToCP.Broadcast(ResultString);
+	}
+}
+
+void UMiguCPSdkUEBPLibrary::OnCommonInterfaceByMsgSDK(const char* data)
+{
+	FString ResultString;
+	std::string temp = data;
+	ResultString = FString(temp.c_str());
+
+	UE_LOG(LogTemp, Warning, TEXT("OnCommonInterfaceByMsgSDK: %s"), *ResultString);
+	OpenMessageBox(ResultString);
+	
+	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
+	if (MIGUSDKGameIns)
+	{
+		MIGUSDKGameIns->OnCommonInterfaceByMsgSDK.Broadcast(ResultString);
+	}
+}
 
 
 void UMiguCPSdkUEBPLibrary::OpenMessageBox(FString Content, FString Title)

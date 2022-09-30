@@ -7,6 +7,24 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "MiguCPSdkUEBPLibrary.generated.h"
 
+USTRUCT(BlueprintType)
+struct FMiguPayInfo
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	FString gameName;     //游戏名称
+	UPROPERTY()
+	FString contentCode;  //云游戏内容管理平台的内容代码
+	UPROPERTY()
+	FString gameAccount;  //CP的游戏账户ID
+	UPROPERTY()
+	FString orderId;      //订单号
+	UPROPERTY()
+	FString propName;     //道具名称
+	UPROPERTY()
+	int orderAmount;	  //订单金额（单位：分）
+};
 
 UCLASS()
 class MIGUCPSDKUE_API UMiguCPSdkUEBPLibrary : public UBlueprintFunctionLibrary
@@ -53,8 +71,14 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu CommonBusinessInit"), Category = "MiguCPSDK")
 	static int CommonBusinessInitMsg(FString AppId, FString AppSecret);
 
-	//UFUNCTION(BlueprintCallable, meta = (DisplayName), Category = "MiguCPSDK")
-	//static void CloudPayMsg(const TagMiguPayInfo PayInfo, int timeoutSeconds = 10);
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu CloudPayMsg"), Category = "MiguCPSDK")
+	static void CloudPayMsg(const FMiguPayInfo PayInfo, int timeoutSeconds = 10);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu CloudPayToCP"), Category = "MiguCPSDK")
+	static void CloudPayToCPMsg(FString PayUrl, int timeoutSeconds = 10);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "MiGu CommonInterfaceByMsgSDK"), Category = "MiguCPSDK")
+	static void CommonInterfaceByMsgSDKMsg(const int Type, FString Data, int timeoutSeconds = 10);
 	
 public:
 	static void  OnLogin(const char* data);
@@ -67,6 +91,9 @@ public:
 	static void OnSetAchievement(const char* data);
 	static void OnQueryAchievementPercentage(const char* data);
 	static void OnCommonBusiness(const char* data);
+	static void OnCloudPay(const char* data);
+	static void OnCloudPayToCP(const char* data);
+	static void OnCommonInterfaceByMsgSDK(const char* data);
 
 private:
 	static void OpenMessageBox(FString Content, FString Title = TEXT("Message"));
