@@ -316,9 +316,11 @@ void UMiguCPSdkUEBPLibrary::OnCommonInterfaceByMsgSDK(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OpenMessageBox(FString Content, FString Title)
 {
+#if !UE_BUILD_SHIPPING
 	const FText DialogTitle = FText::FromString(Title);
 	const FText DialogContent = FText::FromString(Content);
 	EAppReturnType::Type const ReturnType = FMessageDialog::Open(EAppMsgType::Ok, DialogContent, &DialogTitle);
+#endif
 }
 
 UWorld* UMiguCPSdkUEBPLibrary::GetCurWorld()
