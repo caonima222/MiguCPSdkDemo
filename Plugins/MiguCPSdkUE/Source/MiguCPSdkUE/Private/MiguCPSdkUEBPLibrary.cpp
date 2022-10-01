@@ -29,7 +29,7 @@ void UMiguCPSdkUEBPLibrary::LoginMsg(FString ContentCode, int timeoutSeconds)
 
 void UMiguCPSdkUEBPLibrary::LoginInfoMsg(FString ContentCode, int timeoutSeconds)
 {
-	GetLoginInfo(TCHAR_TO_UTF8(*ContentCode), &UMiguCPSdkUEBPLibrary::OnLogin, timeoutSeconds);
+	GetLoginInfo(TCHAR_TO_UTF8(*ContentCode), &UMiguCPSdkUEBPLibrary::OnGetLoginInfo, timeoutSeconds);
 }
 
 void UMiguCPSdkUEBPLibrary::ReleaseSDKMsg()

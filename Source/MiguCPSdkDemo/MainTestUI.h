@@ -22,7 +22,7 @@ public:
 	UButton* Button_GeneralInfo;
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* Button_AllInfo;
+	UButton* Button_AllAchievementInfo;
 
 	UPROPERTY(meta = (BindWidget))
 	UButton* Button_SingleInfo;
@@ -46,7 +46,7 @@ public:
 	UButton* Button_LoginInfo;
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* Button_SendData;
+	UButton* Button_CommonBusiness;
 
 	UPROPERTY(meta = (BindWidget))
 	UButton* Button_GetToken;
@@ -55,10 +55,10 @@ public:
 	UButton* Button_Pay;
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* Button_SaveImage;
+	UButton* Button_CommonBusInit;
 
 	UPROPERTY(meta = (BindWidget))
-	UButton* Button_Exit;
+	UButton* Button_CommonInterface;
 
 	UPROPERTY(meta = (BindWidget))
 	UButton* Button_CPUrl;
@@ -71,7 +71,7 @@ public:
 	void OnClickGeneralInfo();
 
 	UFUNCTION()
-	void OnClickAllInfo();
+	void OnClickAllAchievementInfo();
 
 	UFUNCTION()
 	void OnClickSingleInfo();
@@ -95,7 +95,7 @@ public:
 	void OnClickLoginInfo();
 
 	UFUNCTION()
-	void OnClickSendData();
+	void OnClickCommonBusiness();
 
 	UFUNCTION()
 	void OnClickGetToken();
@@ -104,10 +104,10 @@ public:
 	void OnClickPay();
 	
 	UFUNCTION()
-	void OnClickSaveImage();
+	void OnClickCommonBusInit();
 
 	UFUNCTION()
-	void OnClickExit();
+	void OnClickCommonInterface();
 
 	UFUNCTION()
 	void OnClickCPUrl();
