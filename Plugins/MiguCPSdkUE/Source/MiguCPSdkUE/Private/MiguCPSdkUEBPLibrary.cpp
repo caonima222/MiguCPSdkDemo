@@ -111,9 +111,7 @@ void UMiguCPSdkUEBPLibrary::CommonInterfaceByMsgSDKMsg(const int Type, FString D
 
 void UMiguCPSdkUEBPLibrary::OnLogin(const char* data)
 {
-	FString LoginResult;
-	std::string temp = data;
-	LoginResult = FString(temp.c_str());
+	const FString LoginResult(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnLogin Callback= %s"), *LoginResult);
 	OpenMessageBox(LoginResult);
 	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
@@ -125,9 +123,7 @@ void UMiguCPSdkUEBPLibrary::OnLogin(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnGetLoginInfo(const char* data)
 {
-	FString LoginResult;
-	std::string temp = data;
-	LoginResult = FString(temp.c_str());
+	const FString LoginResult(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnGetLoginInfo: %s"), *LoginResult);
 	OpenMessageBox(LoginResult);
 	UMIGUCPSDKGameInstance* MIGUSDKGameIns = Cast<UMIGUCPSDKGameInstance>(UGameplayStatics::GetGameInstance(UMiguCPSdkUEBPLibrary::GetCurWorld()));
@@ -139,10 +135,7 @@ void UMiguCPSdkUEBPLibrary::OnGetLoginInfo(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnTokenInfo(const char* data)
 {
-	FString TokenResult;
-	std::string temp = data;
-	TokenResult = FString(temp.c_str());
-
+	const FString TokenResult(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnGetToken Callback= %s"), *TokenResult);
 	OpenMessageBox(TokenResult);
 	
@@ -155,10 +148,7 @@ void UMiguCPSdkUEBPLibrary::OnTokenInfo(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnGetGeneralInfo(const char* data)
 {
-	FString ResultString;
-	std::string temp = data;
-	ResultString = FString(temp.c_str());
-
+	const FString ResultString(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnGetGeneralInfo: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
@@ -171,10 +161,7 @@ void UMiguCPSdkUEBPLibrary::OnGetGeneralInfo(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnQueryAllAchievement(const char* data)
 {
-	FString ResultString;
-	std::string temp = data;
-	ResultString = FString(temp.c_str());
-
+	const FString ResultString(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnQueryAllAchievement: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
@@ -187,10 +174,7 @@ void UMiguCPSdkUEBPLibrary::OnQueryAllAchievement(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnSetAchievementBatch(const char* data)
 {
-	FString ResultString;
-	std::string temp = data;
-	ResultString = FString(temp.c_str());
-
+	const FString ResultString(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnSetAchievementBatch: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
@@ -203,10 +187,7 @@ void UMiguCPSdkUEBPLibrary::OnSetAchievementBatch(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnQueryAchievement(const char* data)
 {
-	FString ResultString;
-	std::string temp = data;
-	ResultString = FString(temp.c_str());
-
+	const FString ResultString(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnQueryAchievement: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
@@ -219,10 +200,7 @@ void UMiguCPSdkUEBPLibrary::OnQueryAchievement(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnSetAchievement(const char* data)
 {
-	FString ResultString;
-	std::string temp = data;
-	ResultString = FString(temp.c_str());
-
+	const FString ResultString(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnSetAchievement: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
@@ -235,10 +213,7 @@ void UMiguCPSdkUEBPLibrary::OnSetAchievement(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnQueryAchievementPercentage(const char* data)
 {
-	FString ResultString;
-	std::string temp = data;
-	ResultString = FString(temp.c_str());
-
+	const FString ResultString(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnQueryAchievementPercentage: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
@@ -251,10 +226,7 @@ void UMiguCPSdkUEBPLibrary::OnQueryAchievementPercentage(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnCommonBusiness(const char* data)
 {
-	FString ResultString;
-	std::string temp = data;
-	ResultString = FString(temp.c_str());
-
+	const FString ResultString(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnCommonBusiness: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
@@ -267,10 +239,7 @@ void UMiguCPSdkUEBPLibrary::OnCommonBusiness(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnCloudPay(const char* data)
 {
-	FString ResultString;
-	std::string temp = data;
-	ResultString = FString(temp.c_str());
-
+	const FString ResultString(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnCloudPay: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
@@ -283,10 +252,7 @@ void UMiguCPSdkUEBPLibrary::OnCloudPay(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnCloudPayToCP(const char* data)
 {
-	FString ResultString;
-	std::string temp = data;
-	ResultString = FString(temp.c_str());
-
+	const FString ResultString(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnCloudPayToCP: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
@@ -299,10 +265,7 @@ void UMiguCPSdkUEBPLibrary::OnCloudPayToCP(const char* data)
 
 void UMiguCPSdkUEBPLibrary::OnCommonInterfaceByMsgSDK(const char* data)
 {
-	FString ResultString;
-	std::string temp = data;
-	ResultString = FString(temp.c_str());
-
+	const FString ResultString(UTF8_TO_TCHAR(data));
 	UE_LOG(LogTemp, Warning, TEXT("OnCommonInterfaceByMsgSDK: %s"), *ResultString);
 	OpenMessageBox(ResultString);
 	
